@@ -18,7 +18,7 @@
 
       <tbody>
         <!-- วนลูปข้อมูล customers -->
-        <tr v-for="(item,index) in customers" :key="item.customer_id">
+        <tr v-for="(item,index) in employee" :key="item.emp_id">
           <td>{{ index + 1 }}</td>       <!-- แสดงลำดับที่ (เริ่มจาก 1) -->
           <td>{{ item.emp_id }}</td> <!-- รหัสลูกค้า -->
           <td>{{ item.firstName }}</td>   <!-- ชื่อ -->
@@ -46,13 +46,13 @@
 import { ref, onMounted } from "vue";
 
 export default {
-  name: "CustomerList", // ชื่อ component
+  name: "EmployeeList", // ชื่อ component
 
   setup() {
     // -----------------------------
     // state (ตัวแปร reactive)
     // -----------------------------
-    const customers = ref([]); // เก็บข้อมูลลูกค้า (array)
+    const employee = ref([]); // เก็บข้อมูลลูกค้า (array)
     const loading = ref(true); // สถานะโหลดข้อมูล
     const error = ref(null);   // เก็บ error
 
@@ -70,7 +70,7 @@ export default {
         }
 
         // แปลง response เป็น JSON
-        customers.value = await response.json();
+        employee.value = await response.json();
 
       } catch (err) {
         // ถ้า error ให้เก็บข้อความไว้แสดง
@@ -93,7 +93,7 @@ export default {
     // return ค่าไปใช้ใน template
     // -----------------------------
     return {
-      customers,
+      employee,
       loading,
       error
     };
